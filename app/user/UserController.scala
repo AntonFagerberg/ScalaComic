@@ -18,7 +18,7 @@ object UserController extends Controller {
     Ok(user.views.html.login(loginForm))
   }
 
-  def loginPOST = Action { implicit request =>
+  def loginPOST = Action { implicit req =>
     val sentForm = loginForm.bindFromRequest()
 
     if (sentForm.hasErrors) {
