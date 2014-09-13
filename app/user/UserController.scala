@@ -1,10 +1,30 @@
 package user
 
-import play.api._
+import play.api.data.Forms._
+import play.api.data._
 import play.api.mvc._
 
 object UserController extends Controller {
-  def login = Action {
-    Ok(user.views.html.login())
+  lazy val loginForm = Form(
+    mapping(
+      "email" -> email,
+      "password" -> nonEmptyText
+    )(LoginDetails.apply)(LoginDetails.unapply).verifying("Username or password is not valid!", loginDetails => {
+      UserStore.validate(loginDetails.email, loginDetails.password)
+    })
+  )
+
+  def loginGET = Action {
+    Ok(user.views.html.login(loginForm))
+  }
+
+  def loginPOST = Action { implicit request =>
+    val sentForm = loginForm.bindFromRequest()
+
+    if (sentForm.hasErrors) {
+      BadRequest(user.views.html.login(sentForm))
+    } else {
+      Redirect(collection.routes.CollectionController.listGET()).withNewSession.withSession("email" -> sentForm.get.email)
+    }
   }
 }

@@ -78,6 +78,33 @@ object UserStore {
     }
   }
 
+  def requestValidation(email: String): Option[User] = {
+    val userParser =
+      get[String]("user.email") ~
+      get[Option[String]]("user.full_name") map {
+        case rowEmail ~ fullName => User(rowEmail, fullName)
+      }
+
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          |SELECT
+          | email,
+          | full_name
+          |FROM
+          | user
+          |WHERE
+          | email = {email}
+          |LIMIT 1
+        """.stripMargin
+      ).on(
+        'email -> email
+      ).as(
+        userParser singleOpt
+      )
+    }
+  }
+
   private def hashPassword(password: String, salt: Array[Byte]): Array[Byte] = {
     val spec = new PBEKeySpec(password.toCharArray, salt, 20480, 160)
     val keyFactory: SecretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")

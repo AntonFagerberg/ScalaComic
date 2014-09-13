@@ -1,29 +1,48 @@
+@(form: Form[user.LoginDetails])
+
 @main {
     <div id="login">
         <h2>Log in</h2>
 
-        <label for="username">Username:</label>
-        <br>
-        <input
-            id="username"
-            name="username"
-            type="text"
-            placeholder="Username"
-        />
-        <br><br>
+        @form.globalErrors.map(_.messages).map { msg =>
+            <div class="notice error">
+                <i class="icon-remove-sign icon-large"></i>
+                @msg
+            </div>
+        }
 
-        <label for="password">Password:</label>
-        <br>
-        <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Password"
-        />
-        <br><br>
+        @helper.form(user.routes.UserController.loginPOST()) {
+            <label for="email">E-mail:</label>
+            <br>
+            <input
+                id="email"
+                name="email"
+                type="text"
+                placeholder="E-mail"
+                value="@form("email").value"
+                @if(form.error("email").isDefined) {
+                    class="error"
+                }
+            />
+            <br><br>
 
-        <button class="green">
-            <i class="icon-ok-sign"></i>&nbsp;&nbsp;Sign in
-        </button>
+            <label for="password">Password:</label>
+            <br>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                value="@form("password").value"
+                @if(form.error("password").isDefined) {
+                 class="error"
+                }
+            />
+            <br><br>
+
+            <button class="green" type="submit">
+                <i class="icon-ok-sign"></i>&nbsp;&nbsp;Sign in
+            </button>
+        }
     </div>
 }
