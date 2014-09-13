@@ -1,13 +1,20 @@
-@(title: String)(content: Html)
+@(content: Html)
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+        <title>Comic Baker</title>
+        @* jQuery CDN *@
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+        @* KickStart HTML *@
+        <link rel="stylesheet" href="@routes.Assets.versioned("HTML-KickStart-master/css/kickstart.css")" media="all" />
+        <script src="@routes.Assets.versioned("HTML-KickStart-master/js/kickstart.js")"></script>
+
+        @* Comic Baker *@
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")" media="all" />
+        <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
     </head>
     <body>
         @content

@@ -1,14 +1,14 @@
 name := """ComicBaker"""
 
-version := "1.0-SNAPSHOT"
+version := "0.1"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala,SbtWeb)
 
 scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
   jdbc,
-  anorm,
-  cache,
-  ws
+  anorm
 )
+
+pipelineStages := Seq(rjs, digest, gzip)
