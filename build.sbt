@@ -8,7 +8,8 @@ scalaVersion := "2.11.1"
 
 libraryDependencies ++= Seq(
   jdbc,
-  anorm
+  anorm,
+  "mysql" % "mysql-connector-java" % "5.1.32"
 )
 
 pipelineStages := Seq(rjs, digest, gzip)
