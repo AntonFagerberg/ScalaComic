@@ -10,7 +10,8 @@ libraryDependencies ++= Seq(
   jdbc,
   anorm,
   "mysql" % "mysql-connector-java" % "5.1.32",
-  "org.apache.commons" % "commons-compress" % "1.8.1"
+  "org.apache.commons" % "commons-compress" % "1.8.1",
+  "commons-io" % "commons-io" % "2.4"
 )
 
 pipelineStages := Seq(rjs, digest, gzip)

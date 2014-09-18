@@ -3,8 +3,9 @@ Comic baker is an open-source (MIT) online comic book / graphical novel organise
 
 ## Working
 
+
 ## In development
-* File type support: cbr, cbt, cbz
+* File type support: cbt, cbz, cb7
 * Upload comics (multiple - drag-n-drop)
 * Browse comics
 * Reverse (manga-style) read mode
@@ -18,7 +19,7 @@ Comic baker is an open-source (MIT) online comic book / graphical novel organise
 * Organise files in a collection
 
 ## Future
-* File type support: cb7, cba
+* File type support: cba, cbr
 * PDF support
 
 ## Technology used
