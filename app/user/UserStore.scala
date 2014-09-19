@@ -10,6 +10,12 @@ import anorm._
 import anorm.SqlParser._
 
 object UserStore {
+  lazy val userParser =
+    get[String]("user.email") ~
+    get[Option[String]]("user.full_name") map {
+      case email ~ fullName => User(email, fullName)
+    }
+
   def create(email: String, password: String, fullName: Option[String]): Boolean = {
     val salt = generateSalt()
     val passwordHash = hashPassword(password, salt)

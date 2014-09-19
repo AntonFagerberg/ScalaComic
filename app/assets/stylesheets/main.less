@@ -1,3 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+body {
+  margin: 0 20px;
+  padding: 0;
+}
+
 #login {
   width: 300px;
   margin: 0 auto;
@@ -8,9 +15,39 @@
   border-radius: 5px;
 
   #dropZone {
-    background-color: pink;
+    font-family: 'Lobster', cursive;
+    font-size: 48px;
+    color: #fff;
+    background-color: #a4ffa4;
     margin: 4px;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
   }
+}
+
+.covers {
+  text-align: center;
+
+  img {
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    padding: 5px;
+    height: 300px;
+    width: 225px;
+    margin: 10px 10px 10px 0;
+
+    &:hover {
+      background-color: #ddffd3;
+    }
+  }
+}
+
+.book {
+  @height: 300px;
+  @width: 225px;
+
+  border: 1px solid #ececec;
+  border-radius: 5px;
+  width: @width;
+  height: @height;
 }

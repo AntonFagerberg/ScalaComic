@@ -2,9 +2,11 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Collection
-GET         /                    collection.CollectionController.listGET
-POST        /upload              collection.CollectionController.uploadPOST
+# Book
+GET         /                    book.BookController.listGET
+POST        /upload              book.BookController.uploadPOST
+GET         /book/:id            book.BookController.detailsGET(id: Long)
+GET         /book/:id/cover      book.BookController.coverGET(id: Long)
 
 # Sign in
 GET         /login               user.UserController.loginGET

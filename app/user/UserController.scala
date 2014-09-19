@@ -24,7 +24,7 @@ object UserController extends Controller {
     if (sentForm.hasErrors) {
       BadRequest(user.views.html.login(sentForm))
     } else {
-      Redirect(collection.routes.CollectionController.listGET()).withNewSession.withSession("email" -> sentForm.get.email)
+      Redirect(book.routes.BookController.listGET()).withNewSession.withSession("email" -> sentForm.get.email)
     }
   }
 }

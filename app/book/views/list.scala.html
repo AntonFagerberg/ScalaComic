@@ -1,0 +1,20 @@
+@()(implicit req: request.ProcessedRequest)
+
+@main {
+    <h1>List!</h1>
+    <div id="dropZoneBorder">
+        <div id="dropZone">
+            Drop books here!
+        </div>
+    </div>
+
+    <div class="covers">
+        @book.BookStore.all(req.user.email).map { bookItem =>
+            <a href="@book.routes.BookController.detailsGET(bookItem.id)"><img src="@book.routes.BookController.coverGET(bookItem.id)" /></a>
+        }
+    </div>
+
+    @helper.javascriptRouter("jsRoutes")(
+        book.routes.javascript.BookController.uploadPOST
+    )
+}

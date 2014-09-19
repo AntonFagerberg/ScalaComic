@@ -1,9 +1,8 @@
-package collection
+package book
 
 import java.io._
 import javax.activation.MimetypesFileTypeMap
 
-import book.BookStore
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry
@@ -13,7 +12,7 @@ import play.api.mvc._
 import request.PreProcessRequest
 import tools.Uncompress
 
-object CollectionController extends Controller {
+object BookController extends Controller {
   lazy val uploadPath = new File(current.configuration.underlying.getString("upload.path"))
   lazy val fileTypeMap = new MimetypesFileTypeMap()
   lazy val validFileTypes = List(
@@ -23,11 +22,11 @@ object CollectionController extends Controller {
   )
   lazy val validImageTypes = List("image/jpeg")
 
-  def listGET() = PreProcessRequest.authenticatedRequest { implicit req =>
-    Ok(collection.views.html.list())
+  def listGET = PreProcessRequest.authenticatedRequest { implicit req =>
+    Ok(book.views.html.list())
   }
 
-  def uploadPOST() = PreProcessRequest.authenticatedRequest { implicit req =>
+  def uploadPOST = PreProcessRequest.authenticatedRequest { implicit req =>
 
     req.body.asMultipartFormData map { formData =>
       val (validFiles, invalidFiles) = formData.files.partition(_.contentType.exists(i => validFileTypes.exists(i ==)))
@@ -75,5 +74,23 @@ object CollectionController extends Controller {
     }
 
     Ok("")
+  }
+
+  def detailsGET(bookId: Long) = PreProcessRequest(BookStore.isOwner(bookId)) { implicit req =>
+    BookStore.find(bookId) map { bookItem =>
+      Ok(
+        views.html.details(bookItem)
+      )
+    } getOrElse {
+      BadRequest("Book not found...")
+    }
+  }
+
+  def coverGET(bookId: Long) = PreProcessRequest(BookStore.isOwner(bookId)) { implicit req =>
+    new File(s"${uploadPath.getAbsolutePath}/$bookId/cover").listFiles().headOption map { cover =>
+      Ok.sendFile(cover, inline = true)
+    } getOrElse {
+      BadRequest("File not found...")
+    }
   }
 }

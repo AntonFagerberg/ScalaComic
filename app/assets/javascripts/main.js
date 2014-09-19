@@ -17,7 +17,7 @@
             e.stopPropagation();
 
             var data = new FormData(),
-                jsRoute = jsRoutes.collection.CollectionController.uploadPOST();
+                jsRoute = jsRoutes.book.BookController.uploadPOST();
 
             jQuery.each(e.originalEvent.dataTransfer.files, function(i, file) {
                 data.append('file-' + i, file);
