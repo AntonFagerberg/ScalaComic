@@ -10,9 +10,8 @@ object BookStore {
   lazy val bookParser =
     get[Long]("book.id") ~
     get[String]("book.title") ~
-    get[String]("book.filename") ~
-    UserStore.userParser map {
-      case id ~ title ~ filename ~ user => Book(id, title, filename, user)
+    get[String]("book.filename") map {
+      case id ~ title ~ filename => Book(id, title, filename)
     }
 
   def all(email: String): Seq[Book] = {
@@ -20,8 +19,7 @@ object BookStore {
       SQL(
         """
           |SELECT
-          | book.*,
-          | user.*
+          | book.*
           |FROM
           | book
           |INNER JOIN
@@ -46,14 +44,9 @@ object BookStore {
       SQL(
         """
           |SELECT
-          | book.*,
-          | user.*
+          | book.*
           |FROM
           | book
-          |INNER JOIN
-          | user
-          |ON
-          | book.email = user.email
           |WHERE
           | book.id = {bookId}
           |LIMIT 1
