@@ -1,0 +1,11 @@
+@(content: Html)(implicit req: request.ProcessedRequest)
+
+@main {
+    <!-- Menu Horizontal -->
+    <ul class="menu">
+        <li><a href="@book.routes.BookController.listGET()"><i class="icon-book"></i> Collection</a>
+        <li><a href="#"><i class="icon-wrench"></i> Settings</a>
+        <li><a href="#"><i class="icon-user"></i> Sign out</a>
+    </ul>
+    @content
+}

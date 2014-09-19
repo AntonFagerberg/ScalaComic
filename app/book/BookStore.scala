@@ -1,10 +1,10 @@
 package book
 
+import anorm.SqlParser._
+import anorm._
 import play.api.Play.current
 import play.api.db._
-import anorm._
-import anorm.SqlParser._
-import user.{UserStore, User}
+import user.User
 
 object BookStore {
   lazy val bookParser =
