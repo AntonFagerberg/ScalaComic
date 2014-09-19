@@ -1,6 +1,6 @@
 @(bookItem: book.Book)(implicit req: request.ProcessedRequest)
 
-@menu {
+@menu("details") {
     <h1>@bookItem.title</h1>
 
     <div class="col_6">

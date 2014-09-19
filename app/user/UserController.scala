@@ -27,4 +27,8 @@ object UserController extends Controller {
       Redirect(book.routes.BookController.listGET()).withNewSession.withSession("email" -> sentForm.get.email)
     }
   }
+
+  def logoutGET = Action { implicit req =>
+    Redirect(user.routes.UserController.loginGET()).withNewSession
+  }
 }
