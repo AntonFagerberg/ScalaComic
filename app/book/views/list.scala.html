@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="covers">
+    <div class="cover">
         @book.BookStore.all(req.user.email).map { bookItem =>
             <a href="@book.routes.BookController.detailsGET(bookItem.id)"><img src="@book.routes.BookController.coverGET(bookItem.id)" /></a>
         }

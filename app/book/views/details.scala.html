@@ -1,5 +1,10 @@
-@(item: book.Book)(implicit req: request.ProcessedRequest)
+@(bookItem: book.Book)(implicit req: request.ProcessedRequest)
 
 @main {
-    <h1>@item.title</h1>
+    <h1>@bookItem.title</h1>
+
+    <div class="col_6">
+        <div class="big-cover"><img src="@book.routes.BookController.coverGET(bookItem.id)" /></div>
+    </div>
+    <div class="col_6"><b>Filename:</b> @bookItem.filename<div>
 }

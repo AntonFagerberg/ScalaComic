@@ -3,6 +3,9 @@
 body {
   margin: 0 20px;
   padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 #login {
@@ -25,7 +28,20 @@ body {
   }
 }
 
-.covers {
+.big-cover {
+  img {
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+
+    &:hover {
+      background-color: #ddffd3;
+    }
+  }
+}
+
+.cover {
   text-align: center;
 
   img {
