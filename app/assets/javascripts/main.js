@@ -1,12 +1,14 @@
 (function () {
     var dropZone = $('#dropZone');
 
-    dropZone.on('dragover', function (e) {
+    dropZone.on('dragexit', function (e) {
+        dropZone.removeClass('hover');
         e.preventDefault();
         e.stopPropagation();
     });
 
     dropZone.on('dragenter', function (e) {
+        dropZone.addClass('hover');
         e.preventDefault();
         e.stopPropagation();
     });

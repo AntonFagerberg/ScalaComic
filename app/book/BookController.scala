@@ -78,16 +78,6 @@ object BookController extends Controller {
     Ok("")
   }
 
-  def detailsGET(bookId: Long) = PreProcessRequest(BookStore.isOwner(bookId)) { implicit req =>
-    BookStore.find(bookId) map { bookItem =>
-      Ok(
-        views.html.details(bookItem)
-      )
-    } getOrElse {
-      BadRequest("Book not found...")
-    }
-  }
-
   def coverGET(bookId: Long) = PreProcessRequest(BookStore.isOwner(bookId)) { implicit req =>
     new File(s"${uploadPath.getAbsolutePath}/$bookId/cover").listFiles().headOption map { cover =>
       Ok.sendFile(cover, inline = true)

@@ -6,7 +6,6 @@
 GET         /                        book.BookController.listGET
 POST        /upload                  book.BookController.uploadPOST
 GET         /book/:id                book.BookController.readGET(id: Long)
-GET         /book/:id/details        book.BookController.detailsGET(id: Long)
 GET         /book/:id/cover          book.BookController.coverGET(id: Long)
 GET         /book/:id/page/:page     book.BookController.pageGET(id: Long, page: String)
 GET         /book/:id/pages/json     book.BookController.JSONpagesGET(id: Long)
