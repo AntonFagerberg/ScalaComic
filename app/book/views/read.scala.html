@@ -1,0 +1,18 @@
+@(bookId: Long)(implicit req: request.ProcessedRequest)
+
+@menuHide("read") {
+    @helper.javascriptRouter("pageRoute")(
+        book.routes.javascript.BookController.JSONpagesGET
+    )
+    <div id="page"></div>
+    <div class="change-page left">
+        <button id="leftButton" class="large green"><i class="icon-reply"></i></button>
+    </div>
+    <div class="change-page right">
+        <button id="rightButton" class="large green"><i class="icon-share-alt"></i></button>
+    </div>
+    <script src="@routes.Assets.versioned("javascripts/read.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        comicBaker.read('@bookId');
+    </script>
+}

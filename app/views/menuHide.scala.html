@@ -1,0 +1,16 @@
+@(section: String)(content: Html)(implicit req: request.ProcessedRequest)
+
+@main {
+    <div id="menu-hide">
+        <ul id="menu-small" class="menu">
+            <li><a onclick="$('#menu-small').hide(); $('#menu-full').slideDown();"><i class="icon-reorder"></i></a>
+        </ul>
+        <ul id="menu-full" class="menu">
+            <li@if(section == "list"){ class="current"}><a href="@book.routes.BookController.listGET()"><i class="icon-book"></i> Collection</a>
+            <li><a href="#"><i class="icon-wrench"></i> Settings</a>
+            <li><a onclick="$('#menu-full').hide(); $('#menu-small').slideDown();"><i class="icon-move"></i> Hide</a>
+            <li><a href="@user.routes.UserController.logoutGET()"><i class="icon-user"></i> Sign out</a>
+        </ul>
+    </div>
+    @content
+}

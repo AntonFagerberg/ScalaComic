@@ -57,6 +57,8 @@ object BookController extends Controller {
                 case _ => // Handle error
               }
 
+              // Remove chars
+
               val firstThumbNail = (f: File) => validImageTypes.contains(fileTypeMap.getContentType(f))
               outputFolder.listFiles().find(firstThumbNail).foreach { file =>
                 val coverFile = new File(s"$coverFolder/${file.getName}")
@@ -92,5 +94,30 @@ object BookController extends Controller {
     } getOrElse {
       BadRequest("File not found...")
     }
+  }
+
+  def JSONpagesGET(bookId: Long) = PreProcessRequest(BookStore.isOwner(bookId)) { implicit req =>
+    val pageURLs = new File(s"${uploadPath.getAbsolutePath}/$bookId/output").list().map(routes.BookController.pageGET(bookId, _)).mkString("[\"", "\",\"", "\"]")
+    Ok(
+      s"""
+        |{"urls" : $pageURLs}
+      """.stripMargin
+    )
+  }
+
+  def pageGET(bookId: Long, page: String) = PreProcessRequest(BookStore.isOwner(bookId)) { implicit req =>
+    val pageFile = new File(s"${uploadPath.getAbsolutePath}/$bookId/output/$page")
+
+    if (pageFile.isFile) {
+      Ok.sendFile(pageFile, inline = true)
+    } else {
+      BadRequest("File not found...")
+    }
+  }
+
+  def readGET(bookId: Long) = PreProcessRequest(BookStore.isOwner(bookId)) { implicit req =>
+    Ok(
+      views.html.read(bookId)
+    )
   }
 }

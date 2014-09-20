@@ -1,11 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster);
 
 body {
-  margin: 0 20px;
+//  margin: 0 20px;
+  margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 }
 
 #login {
@@ -14,6 +12,8 @@ body {
 }
 
 #dropZoneBorder {
+  margin: 10px auto;
+  width: 500px;
   border: 1px solid #ececec;
   border-radius: 5px;
 
@@ -21,10 +21,41 @@ body {
     font-family: 'Lobster', cursive;
     font-size: 48px;
     color: #fff;
-    background-color: #a4ffa4;
+    background-color: #77ff80;
     margin: 4px;
-    padding: 10px 0;
+    padding: 30px 50px;
     text-align: center;
+  }
+}
+
+#page {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.change-page {
+  position: absolute;
+  top: 40%;
+
+  button {
+    height: 70px;
+  }
+
+  &.left {
+    left: 5px;
+  }
+
+  &.right {
+    right: 5px;
   }
 }
 
@@ -34,6 +65,16 @@ body {
   a {
     font-family: 'Lobster', cursive;
     font-size: 28px !important;
+  }
+}
+
+#menu-hide {
+  #menu-small {
+    display: inline-block;
+  }
+
+  #menu-full {
+    display: none;
   }
 }
 
