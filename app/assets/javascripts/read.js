@@ -8,6 +8,16 @@
         $leftButton = $('#left-button'),
         $pageDisplay = $("#page-number-display");
 
+    $img.on('swipeleft', function () {
+        showPage(++index);
+        return false;
+    });
+
+    $img.on('swiperight', function () {
+        showPage(--index);
+        return false;
+    });
+
     $rightButton.click(function () {
         showPage(++index);
         return false;
