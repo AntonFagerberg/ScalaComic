@@ -1,14 +1,20 @@
 @(section: String)(content: Html)(implicit req: request.ProcessedRequest)
 
 @main {
+    <id id="page-number">
+        <button class="pill">
+            <span id="page-number-display">Page ? of ?</span>
+        </button>
+    </id>
     <div id="menu-hide">
-        <ul id="menu-small" class="menu">
-            <li><a onclick="$('#menu-small').hide(); $('#menu-full').slideDown();"><i class="icon-reorder"></i></a>
-        </ul>
+        <button class="green" id="menu-small" onclick="$('#menu-small').hide(); $('#menu-full').slideDown();">
+            <i class="icon-reorder"></i>
+        </button>
+
         <ul id="menu-full" class="menu">
             <li@if(section == "list"){ class="current"}><a href="@book.routes.BookController.listGET()"><i class="icon-book"></i> Collection</a>
             <li><a href="#"><i class="icon-wrench"></i> Settings</a>
-            <li><a onclick="$('#menu-full').hide(); $('#menu-small').slideDown();"><i class="icon-move"></i> Hide</a>
+            <li><a href="#" onclick="$('#menu-full').hide(); $('#menu-small').slideDown();"><i class="icon-move"></i> Hide</a>
             <li><a href="@user.routes.UserController.logoutGET()"><i class="icon-user"></i> Sign out</a>
         </ul>
     </div>

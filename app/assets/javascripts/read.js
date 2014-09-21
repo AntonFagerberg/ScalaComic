@@ -4,8 +4,9 @@
         $img = $('<img />'),
         pageURLs = [],
         index = 0,
-        $rightButton = $('#rightButton'),
-        $leftButton = $('#leftButton');
+        $rightButton = $('#right-button'),
+        $leftButton = $('#left-button'),
+        $pageDisplay = $("#page-number-display");
 
     $rightButton.click(function () {
         showPage(++index);
@@ -27,16 +28,18 @@
             $page.append($img);
         }
 
+        $pageDisplay.text('Page ' + (index + 1) + ' of ' + pageURLs.length);
+
         if (index === 0) {
-            $leftButton.removeClass('green');
+            $leftButton.removeClass('green').addClass('disabled');
         } else if (index == 1) {
-            $leftButton.addClass('green');
+            $leftButton.addClass('green').removeClass('disabled');
         }
 
         if (index === pageURLs.length - 1) {
-            $rightButton.removeClass('green');
+            $rightButton.removeClass('green').addClass('disabled');
         } else if (index ==  pageURLs.length - 2) {
-            $rightButton.addClass('green');
+            $rightButton.addClass('green').removeClass('disabled');
         }
     }
 
